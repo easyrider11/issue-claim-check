@@ -1,0 +1,44 @@
+{
+  "_note": "Synthetic scenario (shape mirrors GitHub REST): a recent 'I'd like to work on this' comment, no PR. Expected verdict LIKELY-CLAIMED.",
+  "owner": "haosulab",
+  "repo": "ManiSkill",
+  "issue": {
+    "html_url": "https://github.com/haosulab/ManiSkill/issues/1200",
+    "number": 1200,
+    "title": "Add a seed argument to the demo script",
+    "state": "open",
+    "user": {"login": "reporter-k", "type": "User"},
+    "labels": [{"name": "good first issue"}],
+    "assignee": null,
+    "assignees": [],
+    "comments": 3,
+    "created_at": "2026-09-20T10:00:00Z",
+    "author_association": "NONE",
+    "body": "Runs are not reproducible."
+  },
+  "timeline_pages": [[]],
+  "comments": [
+    {
+      "id": 11,
+      "user": {"login": "github-actions[bot]", "type": "Bot"},
+      "author_association": "NONE",
+      "created_at": "2026-09-20T10:01:00Z",
+      "body": "Thanks for the issue! Can I take a look at labeling this? I'll take care of triage."
+    },
+    {
+      "id": 12,
+      "user": {"login": "newcomer-l", "type": "User"},
+      "author_association": "NONE",
+      "created_at": "2026-09-30T10:00:00Z",
+      "body": "Hi! I’d like to work on this if nobody else is."
+    },
+    {
+      "id": 13,
+      "user": {"login": "maintainer-m", "type": "User"},
+      "author_association": "MEMBER",
+      "created_at": "2026-09-30T12:00:00Z",
+      "body": "Sounds good, go ahead."
+    }
+  ],
+  "search_items": []
+}

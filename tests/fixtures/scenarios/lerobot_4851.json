@@ -1,0 +1,81 @@
+{
+  "_note": "Hand-built to mirror GitHub REST shapes. Case from a scan on 2026-10-05: issue #4851 got PR #4852 the same day. Titles/bodies are paraphrased.",
+  "owner": "huggingface",
+  "repo": "lerobot",
+  "issue": {
+    "url": "https://api.github.com/repos/huggingface/lerobot/issues/4851",
+    "html_url": "https://github.com/huggingface/lerobot/issues/4851",
+    "number": 4851,
+    "title": "Version check fails for dev installs",
+    "state": "open",
+    "user": {"login": "reporter-a", "type": "User"},
+    "labels": [{"name": "good first issue"}],
+    "assignee": null,
+    "assignees": [],
+    "comments": 0,
+    "created_at": "2026-10-02T09:14:00Z",
+    "updated_at": "2026-10-02T15:40:00Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "The version check compares strings instead of parsed versions."
+  },
+  "timeline_pages": [
+    [
+      {
+        "event": "labeled",
+        "actor": {"login": "maintainer-a", "type": "User"},
+        "created_at": "2026-10-02T09:20:00Z",
+        "label": {"name": "good first issue", "color": "7057ff"}
+      }
+    ],
+    [
+      {
+        "event": "cross-referenced",
+        "actor": {"login": "contributor-b", "type": "User"},
+        "created_at": "2026-10-02T15:40:00Z",
+        "updated_at": "2026-10-02T15:40:00Z",
+        "source": {
+          "type": "issue",
+          "issue": {
+            "url": "https://api.github.com/repos/huggingface/lerobot/issues/4852",
+            "html_url": "https://github.com/huggingface/lerobot/pull/4852",
+            "number": 4852,
+            "title": "Parse versions before comparing",
+            "state": "open",
+            "draft": false,
+            "user": {"login": "contributor-b", "type": "User"},
+            "body": "Fixes #4851\n\nUses packaging.version.",
+            "pull_request": {
+              "url": "https://api.github.com/repos/huggingface/lerobot/pulls/4852",
+              "html_url": "https://github.com/huggingface/lerobot/pull/4852",
+              "merged_at": null
+            },
+            "repository": {"full_name": "huggingface/lerobot"}
+          }
+        }
+      }
+    ]
+  ],
+  "comments": [],
+  "search_items": [
+    {
+      "html_url": "https://github.com/huggingface/lerobot/pull/4852",
+      "number": 4852,
+      "title": "Parse versions before comparing",
+      "state": "open",
+      "draft": false,
+      "body": "Fixes #4851\n\nUses packaging.version.",
+      "user": {"login": "contributor-b", "type": "User"},
+      "pull_request": {"url": "https://api.github.com/repos/huggingface/lerobot/pulls/4852", "merged_at": null}
+    },
+    {
+      "html_url": "https://github.com/huggingface/lerobot/pull/4900",
+      "number": 4900,
+      "title": "Update dataset index",
+      "state": "open",
+      "draft": false,
+      "body": "Refreshes the index (4851 entries). Related to #48510.",
+      "user": {"login": "someone-else", "type": "User"},
+      "pull_request": {"url": "https://api.github.com/repos/huggingface/lerobot/pulls/4900", "merged_at": null}
+    }
+  ]
+}

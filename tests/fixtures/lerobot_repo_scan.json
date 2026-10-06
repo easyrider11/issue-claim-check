@@ -1,0 +1,47 @@
+{
+  "_note": "Hand-built responses for a label scan of huggingface/lerobot. The issues endpoint returns PRs too (items with a pull_request key), and the 'good first issue' list spans two pages.",
+  "issues_by_label": {
+    "good first issue": [
+      [
+        {
+          "html_url": "https://github.com/huggingface/lerobot/pull/4852",
+          "number": 4852,
+          "title": "Parse versions before comparing",
+          "state": "open",
+          "created_at": "2026-10-02T15:40:00Z",
+          "assignees": [],
+          "comments": 0,
+          "pull_request": {"url": "https://api.github.com/repos/huggingface/lerobot/pulls/4852"}
+        },
+        {"$ref": "scenarios/lerobot_4851.json"}
+      ],
+      [
+        {"$ref": "scenarios/lerobot_4727.json"},
+        {"$ref": "scenarios/lerobot_4700_closed_pr.json"}
+      ]
+    ],
+    "help wanted": [
+      [
+        {"$ref": "scenarios/lerobot_4727.json"}
+      ]
+    ]
+  },
+  "open_pulls": [
+    {
+      "html_url": "https://github.com/huggingface/lerobot/pull/4852",
+      "number": 4852,
+      "title": "Parse versions before comparing",
+      "state": "open",
+      "draft": false,
+      "body": "Fixes #4851\n\nUses packaging.version."
+    },
+    {
+      "html_url": "https://github.com/huggingface/lerobot/pull/4728",
+      "number": 4728,
+      "title": "Fix README example",
+      "state": "open",
+      "draft": false,
+      "body": "Closes #4727"
+    }
+  ]
+}

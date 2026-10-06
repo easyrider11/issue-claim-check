@@ -1,0 +1,57 @@
+{
+  "_note": "Synthetic scenario (shape mirrors GitHub REST): open issue whose only PRs were closed or merged. Expected verdict FREE with a note.",
+  "owner": "huggingface",
+  "repo": "lerobot",
+  "issue": {
+    "html_url": "https://github.com/huggingface/lerobot/issues/4700",
+    "number": 4700,
+    "title": "Add type hints to the dataset utilities module",
+    "state": "open",
+    "user": {"login": "reporter-g", "type": "User"},
+    "labels": [{"name": "good first issue"}],
+    "assignee": null,
+    "assignees": [],
+    "comments": 0,
+    "created_at": "2026-08-20T10:00:00Z",
+    "author_association": "MEMBER",
+    "body": "Several helpers lack type hints."
+  },
+  "timeline_pages": [
+    [
+      {
+        "event": "cross-referenced",
+        "created_at": "2026-08-25T10:00:00Z",
+        "source": {
+          "type": "issue",
+          "issue": {
+            "html_url": "https://github.com/huggingface/lerobot/pull/4701",
+            "number": 4701,
+            "title": "Add type hints",
+            "state": "closed",
+            "body": "Fixes #4700",
+            "pull_request": {"html_url": "https://github.com/huggingface/lerobot/pull/4701", "merged_at": null},
+            "repository": {"full_name": "huggingface/lerobot"}
+          }
+        }
+      },
+      {
+        "event": "cross-referenced",
+        "created_at": "2026-08-27T10:00:00Z",
+        "source": {
+          "type": "issue",
+          "issue": {
+            "html_url": "https://github.com/some-fork/lerobot/pull/3",
+            "number": 3,
+            "title": "WIP type hints",
+            "state": "open",
+            "body": "See huggingface/lerobot#4700",
+            "pull_request": {"html_url": "https://github.com/some-fork/lerobot/pull/3", "merged_at": null},
+            "repository": {"full_name": "some-fork/lerobot"}
+          }
+        }
+      }
+    ]
+  ],
+  "comments": [],
+  "search_items": []
+}

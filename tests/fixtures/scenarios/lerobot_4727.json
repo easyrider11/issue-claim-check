@@ -1,0 +1,73 @@
+{
+  "_note": "Hand-built to mirror GitHub REST shapes. Case from a scan on 2026-10-05: issue #4727 had two open PRs, #4728 and #4729. Titles/bodies are paraphrased.",
+  "owner": "huggingface",
+  "repo": "lerobot",
+  "issue": {
+    "url": "https://api.github.com/repos/huggingface/lerobot/issues/4727",
+    "html_url": "https://github.com/huggingface/lerobot/issues/4727",
+    "number": 4727,
+    "title": "Docs example uses a removed argument",
+    "state": "open",
+    "user": {"login": "reporter-c", "type": "User"},
+    "labels": [{"name": "good first issue"}, {"name": "help wanted"}],
+    "assignee": null,
+    "assignees": [],
+    "comments": 0,
+    "created_at": "2026-09-18T08:00:00Z",
+    "updated_at": "2026-09-18T19:00:00Z",
+    "author_association": "NONE",
+    "body": "The example in the README passes an argument that no longer exists."
+  },
+  "timeline_pages": [
+    [
+      {
+        "event": "cross-referenced",
+        "actor": {"login": "contributor-d", "type": "User"},
+        "created_at": "2026-09-18T12:00:00Z",
+        "source": {
+          "type": "issue",
+          "issue": {
+            "html_url": "https://github.com/huggingface/lerobot/pull/4728",
+            "number": 4728,
+            "title": "Fix README example",
+            "state": "open",
+            "draft": false,
+            "body": "Closes #4727",
+            "pull_request": {"html_url": "https://github.com/huggingface/lerobot/pull/4728", "merged_at": null},
+            "repository": {"full_name": "huggingface/lerobot"}
+          }
+        }
+      },
+      {
+        "event": "cross-referenced",
+        "actor": {"login": "contributor-e", "type": "User"},
+        "created_at": "2026-09-18T19:00:00Z",
+        "source": {
+          "type": "issue",
+          "issue": {
+            "html_url": "https://github.com/huggingface/lerobot/pull/4729",
+            "number": 4729,
+            "title": "docs: update example for #4727",
+            "state": "open",
+            "draft": true,
+            "body": "Updates the docs example as described in the issue.",
+            "pull_request": {"html_url": "https://github.com/huggingface/lerobot/pull/4729", "merged_at": null},
+            "repository": {"full_name": "huggingface/lerobot"}
+          }
+        }
+      }
+    ]
+  ],
+  "comments": [],
+  "search_items": [
+    {
+      "html_url": "https://github.com/huggingface/lerobot/pull/4728",
+      "number": 4728,
+      "title": "Fix README example",
+      "state": "open",
+      "draft": false,
+      "body": "Closes #4727",
+      "pull_request": {"merged_at": null}
+    }
+  ]
+}

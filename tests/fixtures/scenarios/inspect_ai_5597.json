@@ -1,0 +1,34 @@
+{
+  "_note": "Hand-built to mirror GitHub REST shapes. Case from a scan on 2026-10-05: issue #5597 had PR #5688 opened the same day. Here the PR is only found through search (no timeline event yet), to exercise the closing-keyword signal. Titles/bodies are paraphrased.",
+  "owner": "UKGovernmentBEIS",
+  "repo": "inspect_ai",
+  "issue": {
+    "url": "https://api.github.com/repos/UKGovernmentBEIS/inspect_ai/issues/5597",
+    "html_url": "https://github.com/UKGovernmentBEIS/inspect_ai/issues/5597",
+    "number": 5597,
+    "title": "HF eval.yaml is read with the wrong encoding",
+    "state": "open",
+    "user": {"login": "reporter-f", "type": "User"},
+    "labels": [{"name": "good first issue"}],
+    "assignee": null,
+    "assignees": [],
+    "comments": 0,
+    "created_at": "2026-10-04T07:30:00Z",
+    "updated_at": "2026-10-04T07:30:00Z",
+    "author_association": "NONE",
+    "body": "Non-ASCII characters in eval.yaml break loading on Windows."
+  },
+  "timeline_pages": [[]],
+  "comments": [],
+  "search_items": [
+    {
+      "html_url": "https://github.com/UKGovernmentBEIS/inspect_ai/pull/5688",
+      "number": 5688,
+      "title": "Read eval.yaml as UTF-8",
+      "state": "open",
+      "draft": false,
+      "body": "resolves https://github.com/UKGovernmentBEIS/inspect_ai/issues/5597",
+      "pull_request": {"merged_at": null}
+    }
+  ]
+}
