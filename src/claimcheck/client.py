@@ -133,6 +133,4 @@ class GitHubClient:
         return self.paginate("/search/issues", {"q": q}, max_items=100)
 
     def list_open_prs(self, owner: str, repo: str, limit: int = 300) -> list[dict]:
-        return self.paginate(
-            f"/repos/{owner}/{repo}/pulls", {"state": "open"}, max_items=limit
-        )
+        return self.paginate(f"/repos/{owner}/{repo}/pulls", {"state": "open"}, max_items=limit)

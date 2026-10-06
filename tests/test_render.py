@@ -46,7 +46,9 @@ def test_text_table_alignment():
     lines = out.splitlines()
     assert lines[0].startswith("#     Title")
     assert lines[2].split()[0] == "4851"
-    assert lines[3].rstrip().endswith("FREE  -")
+    assert lines[3].split()[-2:] == ["FREE", "-"]
+    # Verdict column starts at the same offset on every row.
+    assert lines[2].index("CLAIMED") == lines[3].index("FREE") == lines[0].index("Verdict")
 
 
 def test_markdown_escapes_pipes():

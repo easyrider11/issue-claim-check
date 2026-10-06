@@ -32,7 +32,10 @@ def test_decide_orders_evidence_and_dedupes_prs():
     ]
     verdict, evidence = decide(found)
     assert verdict == s.CLAIMED
-    assert evidence == ["PR #2 open, cross-referenced in timeline", "PR #1 closed, issue still open"]
+    assert evidence == [
+        "PR #2 open, cross-referenced in timeline",
+        "PR #1 closed, issue still open",
+    ]
 
 
 @pytest.mark.parametrize(

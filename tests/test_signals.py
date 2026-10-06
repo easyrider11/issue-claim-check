@@ -178,12 +178,16 @@ def test_no_intent(text):
 
 
 def test_recent_intent_comment():
-    sig = s.check_comments([_comment("dev", "I'd like to work on this", "2026-10-01T12:00:00Z")], NOW)
+    sig = s.check_comments(
+        [_comment("dev", "I'd like to work on this", "2026-10-01T12:00:00Z")], NOW
+    )
     assert sig == s.Signal(s.LIKELY_CLAIMED, "@dev asked to work on it 4d ago")
 
 
 def test_old_intent_comment_ignored():
-    assert s.check_comments([_comment("dev", "can I take this", "2026-08-01T00:00:00Z")], NOW) is None
+    assert (
+        s.check_comments([_comment("dev", "can I take this", "2026-08-01T00:00:00Z")], NOW) is None
+    )
 
 
 def test_bot_intent_comment_ignored():
@@ -194,7 +198,9 @@ def test_bot_intent_comment_ignored():
 def test_maintainer_refusal_cancels_claim():
     comments = [
         _comment("dev", "Can I take this?", "2026-10-01T00:00:00Z"),
-        _comment("lead", "Sorry, this is already being worked on.", "2026-10-02T00:00:00Z", "MEMBER"),
+        _comment(
+            "lead", "Sorry, this is already being worked on.", "2026-10-02T00:00:00Z", "MEMBER"
+        ),
     ]
     assert s.check_comments(comments, NOW) is None
 

@@ -13,7 +13,10 @@ from claimcheck.cli import parse_target, run
         ("huggingface/lerobot#4851", ("huggingface", "lerobot", 4851)),
         ("https://github.com/huggingface/lerobot/issues/4851", ("huggingface", "lerobot", 4851)),
         ("github.com/haosulab/ManiSkill/issues/12#issuecomment-1", ("haosulab", "ManiSkill", 12)),
-        ("https://github.com/google-deepmind/mujoco_playground", ("google-deepmind", "mujoco_playground", None)),
+        (
+            "https://github.com/google-deepmind/mujoco_playground",
+            ("google-deepmind", "mujoco_playground", None),
+        ),
         ("https://github.com/o/r.git", ("o", "r", None)),
     ],
 )
