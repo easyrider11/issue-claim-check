@@ -6,24 +6,29 @@ An issue can look open and unassigned while a pull request for it was opened hou
 
 ## Example
 
-Example from a scan on 2026-10-05. Titles are paraphrased and the Age column is left out; the evidence column is shortened to the PR numbers that were found.
-
-| Repo | # | Title | Verdict | Evidence |
-|---|---|---|---|---|
-| huggingface/lerobot | 4851 | version check | CLAIMED | PR #4852 open (opened the same day as the issue) |
-| huggingface/lerobot | 4727 | — | CLAIMED | PR #4728 open; PR #4729 open |
-| UKGovernmentBEIS/inspect_ai | 5597 | HF eval.yaml encoding | CLAIMED | PR #5688 open (opened the same day as the issue) |
-
-Plain-text output for one issue has this shape (illustrative: the age and the link wording below are placeholders, not captured output):
+Real output, captured 2026-10-07 with `GITHUB_TOKEN` set. Ages and links are as the tool printed them.
 
 ```
 $ claimcheck huggingface/lerobot#4851
-#     Title                                 Age  Verdict  Evidence
-----  ------------------------------------  ---  -------  --------
-4851  ...                                   ?d   CLAIMED  PR #4852 open, links via '<how it links>'
+#     Title                                     Age  Verdict  Evidence
+----  ----------------------------------------  ---  -------  --------
+4851  check_version_compatibility warns "upda…  2d   CLAIMED  PR #4852 open, links via 'Fixes: #4851'
 
 0 of 1 issue(s) look free.
 ```
+
+```
+$ claimcheck UKGovernmentBEIS/inspect_ai --markdown
+```
+
+| # | Title | Age | Verdict | Evidence |
+|---|---|---|---|---|
+| [#5712](https://github.com/UKGovernmentBEIS/inspect_ai/issues/5712) | Dataframe imports shift timezone-less t… | 1d | LIKELY-CLAIMED | @XCODESSS claimed it in a comment 1d ago |
+| [#5711](https://github.com/UKGovernmentBEIS/inspect_ai/issues/5711) | Dataset loaders silently change answer … | 1d | LIKELY-CLAIMED | @XCODESSS claimed it in a comment 1d ago |
+| [#5597](https://github.com/UKGovernmentBEIS/inspect_ai/issues/5597) | HF task loading reads eval.yaml with th… | 9d | CLAIMED | PR #5688 open, links via 'Fixes #5597'; PR #5629 closed, issue still open; PR #5476 merged, issue still open |
+
+All three were open, unassigned, and labelled `good first issue`. #5711 and #5712 had no PR yet, but the
+commenter had already pushed a fix to their fork the day the issues were filed.
 
 ## Install
 
@@ -57,14 +62,14 @@ Each issue gets the strongest verdict any check finds:
 |---|---|
 | ASSIGNED | The issue has an assignee. |
 | CLAIMED | An open PR in the same repo references the issue in its timeline, is linked in the Development sidebar, or says `fixes/closes/resolves #N` (or the full issue URL) in its title or body. |
-| LIKELY-CLAIMED | In the last 30 days a non-bot user commented something like "I'd like to work on this", "can I take this", "assign me", and no maintainer turned them down afterwards. |
-| FREE | None of the above. Closed or merged PRs are still listed as evidence. |
+| LIKELY-CLAIMED | In the last 30 days a non-bot user commented something like "I'd like to work on this", "can I take this", "assign me", "I fixed this in <fork commit>", and no maintainer turned them down afterwards. A maintainer saying they are on it counts too, and is labelled as a maintainer. |
+| FREE | None of the above. Closed or merged PRs, and claim comments older than 30 days, are still listed as evidence so you can judge whether they were abandoned. |
 
 When checking one issue, open PRs are found with the search API. When scanning a repo, `claimcheck` lists the repo's open PRs once (up to 300) and matches closing keywords locally, to avoid one search request per issue.
 
 ## Limitations
 
-- Comment matching uses a fixed phrase list (`INTENT_PHRASES` in `src/claimcheck/signals.py`). It misses claims written differently and can flag questions like "is anyone working on this?".
+- Comment matching uses a fixed phrase list (`INTENT_PHRASES` in `src/claimcheck/signals.py`). It misses claims written differently and can flag questions like "is anyone working on this?". The first run against live repos (2026-10-07: lerobot, inspect_ai, navigation2, harbor) found two misses - "I'd like to help with ..." and "I fixed this in <commit>" - which are now in the list with regression tests. Expect more.
 - GitHub's search index can lag a few minutes behind new PRs. A PR that only mentions the issue number without a closing keyword is caught only through the timeline.
 - Cross-references from PRs in forks or other repos are ignored.
 - A scan costs about 3 requests per issue. Unauthenticated, a 50-issue scan will hit the rate limit; use `GITHUB_TOKEN`.

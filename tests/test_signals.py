@@ -166,13 +166,21 @@ def test_closing_prs_strict_filter():
         "please assign me",
         "I'll open a PR shortly",
         "I would like to   work on\nthis issue",
+        "I'd like to help with a bounded first step",  # lerobot#4784, missed before
+        "I would like to contribute a fix",
+        "I'm happy to open a PR for this",
+        "I fixed this in [b4b6eed74](https://github.com/x/inspect_ai/commit/b4b6eed74).",
+        "I have a fix ready locally",
     ],
 )
 def test_has_intent(text):
     assert s.has_intent(text)
 
 
-@pytest.mark.parametrize("text", ["Thanks for the report", "Is this a bug?", "", None])
+@pytest.mark.parametrize(
+    "text",
+    ["Thanks for the report", "Is this a bug?", "Happy to review a PR", "", None],
+)
 def test_no_intent(text):
     assert not s.has_intent(text)
 
@@ -181,13 +189,49 @@ def test_recent_intent_comment():
     sig = s.check_comments(
         [_comment("dev", "I'd like to work on this", "2026-10-01T12:00:00Z")], NOW
     )
-    assert sig == s.Signal(s.LIKELY_CLAIMED, "@dev asked to work on it 4d ago")
+    assert sig == s.Signal(s.LIKELY_CLAIMED, "@dev claimed it in a comment 4d ago")
 
 
-def test_old_intent_comment_ignored():
-    assert (
-        s.check_comments([_comment("dev", "can I take this", "2026-08-01T00:00:00Z")], NOW) is None
+def test_scoped_proposal_counts_as_claim():
+    # Real comment shape from huggingface/lerobot#4784 (2026-09-30): a scoped
+    # first-step proposal, "no PR yet". Reported FREE before this phrase existed.
+    body = (
+        "I'd like to help with a bounded first step: a non-blocking name-count lint "
+        "for 1D numeric features ... I haven't started an implementation or PR yet."
     )
+    sig = s.check_comments([_comment("contrib", body, "2026-09-30T12:00:00Z")], NOW)
+    assert sig.verdict == s.LIKELY_CLAIMED
+
+
+def test_fixed_in_fork_counts_as_claim():
+    # Real comment shape from UKGovernmentBEIS/inspect_ai#5711 (2026-10-06):
+    # a fork commit, no PR opened yet. Reported FREE before.
+    c = _comment(
+        "forker",
+        "I fixed this in [b4b6eed74](https://github.com/forker/inspect_ai/"
+        "commit/b4b6eed74). `read_choices()` now ...",
+        "2026-10-04T00:00:00Z",
+    )
+    assert s.check_comments([c], NOW).verdict == s.LIKELY_CLAIMED
+
+
+def test_maintainer_claim_is_worded_as_maintainer():
+    # ros-navigation/navigation2#5952: the maintainer took the work himself.
+    c = _comment(
+        "lead",
+        "I'm pretty deep down it, working on this in the background",
+        "2026-09-10T00:00:00Z",
+        assoc="MEMBER",
+    )
+    sig = s.check_comments([c], NOW)
+    assert sig == s.Signal(s.LIKELY_CLAIMED, "maintainer @lead claimed it in a comment 25d ago")
+
+
+def test_old_intent_comment_is_evidence_but_not_a_claim():
+    # ros-navigation/navigation2#6349: "i'd love to work on this" 53 days earlier.
+    # Still FREE, but shown, so the reader can check whether it was abandoned.
+    sig = s.check_comments([_comment("dev", "can I take this", "2026-08-01T00:00:00Z")], NOW)
+    assert sig == s.Signal(s.FREE, "@dev claimed it in a comment 65d ago (older than 30 days)")
 
 
 def test_bot_intent_comment_ignored():
@@ -219,4 +263,4 @@ def test_later_claim_after_refusal_counts():
         _comment("lead", "Already assigned elsewhere", "2026-09-21T00:00:00Z", "OWNER"),
         _comment("b", "I'll take it then", "2026-10-05T08:00:00Z"),
     ]
-    assert s.check_comments(comments, NOW).evidence == "@b asked to work on it today"
+    assert s.check_comments(comments, NOW).evidence == "@b claimed it in a comment today"

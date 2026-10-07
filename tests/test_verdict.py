@@ -60,8 +60,12 @@ def test_decide_orders_evidence_and_dedupes_prs():
         ),
         ("lerobot_4700_closed_pr.json", "FREE", ["PR #4701 closed, issue still open"]),
         ("navigation2_assigned.json", "ASSIGNED", ["assigned to @helper-i"]),
-        ("maniskill_intent.json", "LIKELY-CLAIMED", ["@newcomer-l asked to work on it 5d ago"]),
-        ("mujoco_playground_free.json", "FREE", []),
+        ("maniskill_intent.json", "LIKELY-CLAIMED", ["@newcomer-l claimed it in a comment 5d ago"]),
+        (
+            "mujoco_playground_free.json",
+            "FREE",
+            ["@drive-by-o claimed it in a comment 117d ago (older than 30 days)"],
+        ),
     ],
 )
 def test_scenarios(fake, scenario, verdict, evidence):

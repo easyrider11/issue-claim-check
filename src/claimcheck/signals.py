@@ -30,6 +30,29 @@ INTENT_PHRASES: tuple[str, ...] = (
     "i would like to take",
     "i'd like to tackle",
     "i'd like to pick this up",
+    "i'd like to help with",
+    "i would like to help with",
+    "i'd like to contribute",
+    "i would like to contribute",
+    "i'd like to implement",
+    "i would like to implement",
+    "i'll implement",
+    "i can implement",
+    "i'm happy to open a pr",
+    "i'd be happy to open a pr",
+    "happy to submit a pr",
+    "i've started working",
+    "i have started working",
+    "i'm on it",
+    "i fixed this",
+    "i've fixed this",
+    "i have fixed this",
+    "i have a fix",
+    "i've got a fix",
+    "fixed it in my fork",
+    "i've opened a pr",
+    "i have opened a pr",
+    "i've submitted a pr",
     "i can work on this",
     "i can take this",
     "can i work on",
@@ -234,7 +257,10 @@ def check_comments(
     window_days: int = COMMENT_WINDOW_DAYS,
 ) -> Signal | None:
     """Most recent non-bot "I'll work on this" comment in the window, unless a
-    maintainer later turned it down."""
+    maintainer later turned it down.
+
+    A claim older than the window does not change the verdict, but is returned
+    as FREE evidence so a stale claim is visible instead of showing nothing."""
     now = now or datetime.now(timezone.utc)
     cutoff = now - timedelta(days=window_days)
     ordered = sorted(comments, key=lambda c: c["created_at"])
@@ -243,8 +269,6 @@ def check_comments(
         if is_bot(c.get("user")) or not has_intent(c.get("body")):
             continue
         created = parse_time(c["created_at"])
-        if created < cutoff:
-            break
         refused = any(
             later.get("author_association") in MAINTAINER_ASSOCIATIONS
             and not is_bot(later.get("user"))
@@ -255,5 +279,14 @@ def check_comments(
             continue
         days = (now - created).days
         when = "today" if days == 0 else f"{days}d ago"
-        return Signal(LIKELY_CLAIMED, f"@{c['user']['login']} asked to work on it {when}")
+        if created < cutoff:
+            return Signal(
+                FREE,
+                f"@{c['user']['login']} claimed it in a comment {when} "
+                f"(older than {window_days} days)",
+            )
+        who = f"@{c['user']['login']}"
+        if c.get("author_association") in MAINTAINER_ASSOCIATIONS:
+            return Signal(LIKELY_CLAIMED, f"maintainer {who} claimed it in a comment {when}")
+        return Signal(LIKELY_CLAIMED, f"{who} claimed it in a comment {when}")
     return None
